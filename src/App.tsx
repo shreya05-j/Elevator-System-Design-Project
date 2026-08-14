@@ -31,7 +31,7 @@ export default function App() {
 
   // Connect to Django Channels WebSocket Backend
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:8001/ws/elevator/");
+    ws.current = new WebSocket("ws://localhost:8000/ws/elevator/");
     
     ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);

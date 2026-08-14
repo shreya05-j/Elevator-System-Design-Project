@@ -71,10 +71,16 @@ class ElevatorConsumer(AsyncWebsocketConsumer):
 
     async def system_update(self, event):
         state = event['state']
-        await self.send(text_data=json.dumps(state))
+        try:
+            await self.send(text_data=json.dumps(state))
+        except Exception:
+            pass
 
     async def send_system_state(self):
-        await self.send(text_data=json.dumps({
-            "type": "initial_state",
-            "snapshot": global_dispatcher.snapshot()
-        }))
+        try:
+            await self.send(text_data=json.dumps({
+                "type": "initial_state",
+                "snapshot": global_dispatcher.snapshot()
+            }))
+        except Exception:
+            pass
